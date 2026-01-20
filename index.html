@@ -1,0 +1,543 @@
+ <!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Interaktif Saya</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #FDFDFD;
+            --accent-color: #6366F1;
+            --secondary-color: #94a3b8;
+            --shadow-color: rgba(56, 189, 248, 0.2);
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Light mode variables */
+        body.light-mode {
+            --bg-color: #f0f2f5;
+            --card-bg: #ffffff;
+            --text-color: #334155;
+            --accent-color: #0ea5e9;
+            --secondary-color: #64748b;
+            --shadow-color: rgba(14, 165, 233, 0.1);
+            --border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header & Theme Toggle */
+        header {
+            display: flex;
+            justify-content: flex-end;
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .theme-toggle {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 0.7rem 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px var(--shadow-color);
+        }
+
+        .theme-toggle i {
+            font-size: 1.2rem;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 0;
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid var(--accent-color);
+            object-fit: cover;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 25px var(--shadow-color);
+            transition: transform 0.4s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.08) rotate(3deg);
+            box-shadow: 0 0 35px var(--shadow-color);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        .highlight {
+            color: var(--accent-color);
+        }
+
+        .typing-effect {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            min-height: 30px; /* To prevent layout shift */
+            margin-bottom: 2rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+            color: var(--secondary-color);
+        }
+
+        /* Social Icons */
+        .social-links {
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--secondary-color);
+            font-size: 1.8rem;
+            margin: 0 1rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        /* --- Sections & Cards --- */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--accent-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px var(--shadow-color);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--accent-color);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease-out;
+        }
+
+        .card:hover::before {
+            transform: translateX(0);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px var(--shadow-color);
+        }
+
+        h3 {
+            margin-bottom: 1.2rem;
+            color: var(--accent-color);
+            font-size: 1.6rem;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .card ul li {
+            margin-bottom: 0.7rem;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card ul li i {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+        }
+
+        .project-item {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .project-item:last-child {
+            border-bottom: none;
+        }
+
+        .project-item h4 {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-item p {
+            color: var(--secondary-color);
+            font-size: 0.95rem;
+        }
+
+        /* Call to Action Button */
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: var(--bg-color);
+            padding: 1rem 2.2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 2.5rem;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            font-size: 1.1rem;
+            border: 2px solid var(--accent-color);
+        }
+
+        .btn:hover {
+            background: transparent;
+            color: var(--accent-color);
+            box-shadow: 0 0 20px var(--shadow-color);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 6rem;
+            padding-bottom: 2rem;
+            color: var(--secondary-color);
+            font-size: 0.95rem;
+            animation: fadeIn 2s ease-in;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .typing-effect { font-size: 1.2rem; }
+            .profile-img { width: 150px; height: 150px; }
+            .section-title { font-size: 2rem; margin-bottom: 2rem; }
+            .card { padding: 1.5rem; }
+            .grid { gap: 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; }
+            .typing-effect { font-size: 1rem; }
+            .hero p { font-size: 0.9rem; }
+            .social-links a { margin: 0 0.8rem; font-size: 1.5rem; }
+            .container { padding: 1rem; }
+            .btn { padding: 0.8rem 1.8rem; font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="container">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+            <i class="fas fa-moon" id="theme-icon"></i> <span id="theme-text">Dark Mode</span>
+        </button>
+    </header>
+
+    <div class="container">
+        <section class="hero fade-in-section">
+            <img src="https://image2url.com/r2/default/images/1768831562945-c1417561-8f72-46bb-abe5-e09e9283b297.jpg" alt="Foto Profil Anda" class="profile-img">
+            <h1>Halo, Saya <span class="highlight">Mizan hadinata</span></h1>
+            <p class="typing-effect" data-words='["Pengembang Web", "Desainer UI/UX", "Kreator Konten", "Pecinta Teknologi"]'></p>
+            <p>Saya seorang profesional yang bersemangat dalam menciptakan solusi digital yang inovatif dan berpusat pada pengguna, dengan fokus pada pengalaman yang mulus dan desain yang estetis.</p>
+            <div class="social-links">
+                <a href="https://linkedin.com/in/username" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/username" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://twitter.com/username" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="mailto:emailanda@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+            <a href="#proyek" class="btn">Lihat Proyek Saya <i class="fas fa-arrow-right"></i></a>
+        </section>
+
+        <section id="tentang" class="fade-in-section" style="margin-top: 5rem;">
+            <h2 class="section-title">Tentang Saya</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Filosofi Kerja</h3>
+                    <p>Saya percaya bahwa setiap proyek adalah kesempatan untuk belajar dan berinovasi. Pendekatan saya selalu mengedepankan kolaborasi, pemecahan masalah yang kreatif, dan memberikan hasil yang melebihi ekspektasi.</p>
+                </div>
+                <div class="card">
+                    <h3>Pengalaman</h3>
+                    <p>Memiliki <strong>3+ tahun pengalaman</strong> dalam pengembangan frontend dan desain UI/UX, bekerja dengan berbagai startup dan perusahaan teknologi. Saya terbiasa dengan siklus pengembangan agile dan berorientasi pada hasil.</p>
+                </div>
+                <div class="card">
+                    <h3>Pendidikan</h3>
+                    <p><strong>Sarjana Ilmu Komputer</strong><br>Universitas Teknologi Hebat (2020)</p>
+                    <p>Fokus pada Rekayasa Perangkat Lunak dan Desain Sistem. Lulus dengan predikat cum laude.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="keahlian" class="fade-in-section" style="margin-top: 5rem;">
+            <h2 class="section-title">Keahlian</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Frontend Development</h3>
+                    <ul>
+                        <li><i class="fas fa-code"></i> HTML5, CSS3, JavaScript (ES6+)</li>
+                        <li><i class="fab fa-react"></i> React.js, Next.js</li>
+                        <li><i class="fas fa-mobile-alt"></i> Responsive & Mobile-First Design</li>
+                        <li><i class="fas fa-cogs"></i> Git, Webpack, Babel</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Desain UI/UX</h3>
+                    <ul>
+                        <li><i class="fas fa-paint-brush"></i> Figma, Adobe XD, Sketch</li>
+                        <li><i class="fas fa-vector-square"></i> Wireframing & Prototyping</li>
+                        <li><i class="fas fa-users"></i> User Research & Usability Testing</li>
+                        <li><i class="fas fa-palette"></i> Design Systems & Branding</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Lain-lain</h3>
+                    <ul>
+                        <li><i class="fas fa-database"></i> Basic Node.js & Express.js</li>
+                        <li><i class="fab fa-aws"></i> Pengenalan AWS / Google Cloud</li>
+                        <li><i class="fas fa-bug"></i> Debugging & Testing</li>
+                        <li><i class="fas fa-comments"></i> Komunikasi & Kolaborasi Tim</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="proyek" class="fade-in-section" style="margin-top: 5rem;">
+            <h2 class="section-title">Proyek Pilihan</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Project X - Aplikasi E-Commerce Modern</h3>
+                    <div class="project-item">
+                        <h4>Fitur Utama</h4>
+                        <p>Platform belanja online dengan dashboard admin, integrasi pembayaran Stripe, dan fitur daftar keinginan.</p>
+                    </div>
+                    <div class="project-item">
+                        <h4>Teknologi</h4>
+                        <p>React, Next.js, Tailwind CSS, Node.js, MongoDB</p>
+                    </div>
+                    <a href="#" class="btn" target="_blank">Lihat Proyek <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <div class="card">
+                    <h3>Project Y - Sistem Manajemen Portofolio</h3>
+                    <div class="project-item">
+                        <h4>Fitur Utama</h4>
+                        <p>Alat untuk desainer/developer menampilkan proyek mereka dengan tata letak yang menarik dan analitik pengunjung.</p>
+                    </div>
+                    <div class="project-item">
+                        <h4>Teknologi</h4>
+                        <p>Vue.js, Firebase, SCSS</p>
+                    </div>
+                    <a href="#" class="btn" target="_blank">Lihat Proyek <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <div class="card">
+                    <h3>Project Z - Landing Page Perusahaan Tech</h3>
+                    <div class="project-item">
+                        <h4>Fitur Utama</h4>
+                        <p>Landing page responsif dan beranimasi untuk startup teknologi, berfokus pada konversi.</p>
+                    </div>
+                    <div class="project-item">
+                        <h4>Teknologi</h4>
+                        <p>HTML5, CSS3 (Animasi), JavaScript (GSAP)</p>
+                    </div>
+                    <a href="#" class="btn" target="_blank">Lihat Proyek <i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <section id="kontak" class="fade-in-section" style="margin-top: 5rem; text-align: center;">
+            <h2 class="section-title">Hubungi Saya</h2>
+            <p style="max-width: 700px; margin: 0 auto 2rem; color: var(--secondary-color);">Tertarik untuk bekerja sama atau sekadar ingin menyapa? Jangan ragu untuk menghubungi saya melalui email atau media sosial.</p>
+            <a href="mailto:mizanhadinata140@gmail.com" class="btn">Kirim Email <i class="fas fa-paper-plane"></i></a>
+        </section>
+
+        <footer>
+            <p>&copy; <span id="current-year"></span> Mizan Hadinata. Semua Hak Cipta Dilindungi Undang-Undang.</p>
+            <p>Didesain & Dikembangkan dengan ❤️</p>
+        </footer>
+    </div>
+
+    <script>
+        // --- Typing Effect ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const typingElement = document.querySelector('.typing-effect');
+            const words = JSON.parse(typingElement.dataset.words);
+            let wordIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            let typingSpeed = 150; // Kecepatan mengetik
+            let deletingSpeed = 80; // Kecepatan menghapus
+            let delayBetweenWords = 1500; // Jeda sebelum mengetik kata berikutnya
+
+            function type() {
+                const currentWord = words[wordIndex];
+                if (isDeleting) {
+                    typingElement.textContent = currentWord.substring(0, charIndex--);
+                } else {
+                    typingElement.textContent = currentWord.substring(0, charIndex++);
+                }
+
+                if (!isDeleting && charIndex > currentWord.length) {
+                    isDeleting = true;
+                    setTimeout(type, delayBetweenWords);
+                } else if (isDeleting && charIndex < 0) {
+                    isDeleting = false;
+                    wordIndex = (wordIndex + 1) % words.length;
+                    charIndex = 0;
+                    setTimeout(type, typingSpeed);
+                } else {
+                    setTimeout(type, isDeleting ? deletingSpeed : typingSpeed);
+                }
+            }
+            type();
+
+            // --- Scroll Reveal Animation ---
+            const sections = document.querySelectorAll('.fade-in-section');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Stop observing once visible
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // --- Theme Toggle ---
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+            const themeText = document.getElementById('theme-text');
+
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light-mode') {
+                document.body.classList.add('light-mode');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                themeText.textContent = 'Light Mode';
+            }
+
+            themeToggleBtn.addEventListener('click', () => {
+                document.body.classList.toggle('light-mode');
+                if (document.body.classList.contains('light-mode')) {
+                    localStorage.setItem('theme', 'light-mode');
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                    themeText.textContent = 'Light Mode';
+                } else {
+                    localStorage.setItem('theme', 'dark-mode');
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                    themeText.textContent = 'Dark Mode';
+                }
+            });
+
+            // Set current year in footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+        });
+    </script>
+
+</body>
+</html>
